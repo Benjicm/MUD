@@ -1,6 +1,8 @@
 
 public class Command {
 
+	
+	// --- Fields ---
 	public static final int GET = 0;
 	public static final int DROP = 1;
 	public static final int MOVE = 2;
@@ -23,11 +25,14 @@ public class Command {
 	String param; // the parameter for the action. Either a direction, if the action is to move, or the name of the item, if the action is picking up or dropping an item.
 
 	
+	// --- Constructor ---
+	public Command(int action, int charID, String param) {
+		this.action = action;
+		this.charID = charID;
+		this.param = param;
+	}
 	
-	
-	
-	
-	// Methods
+	// --- Methods --- 
 	
 	// returns action
 	public int getAction() {
