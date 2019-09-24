@@ -11,6 +11,7 @@ public class ItemList {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	private int getItemIndex(int itemID)
 	{
@@ -53,6 +54,18 @@ public class ItemList {
 	// 3. and a simple boolean that defines if the item is portable
 	
 	
+=======
+	// the setupFileReader class will require some code to be added to it, as there is no place to store the
+	// data of which item id corresponds to which name. I assume that will be added to this class yeah? - Alex 
+	
+	
+	// things this class needs: 
+	// 1. An array list that holds item id's
+	// 2.the names of each item
+	// 3. and a simple boolean that defines if the item is portable
+	
+	
+>>>>>>> refs/remotes/origin/eclipse
 =======
 	// the setupFileReader class will require some code to be added to it, as there is no place to store the
 	// data of which item id corresponds to which name. I assume that will be added to this class yeah? - Alex 
