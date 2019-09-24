@@ -9,6 +9,9 @@ public class Exit {
 	public static final String SOUTHWEST = "SW";
 	public static final String WEST = "W";
 	public static final String NORTHWEST = "NW";
+	public static final String UP = "U";
+	public static final String DOWN = "D";
+	public static final String OTHER = "O";
 	
 	int exitsTo;
 	String direction;

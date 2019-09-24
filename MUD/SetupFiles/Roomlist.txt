@@ -1,0 +1,11 @@
+1,testroom
+2,start_room
+3,4Way
+4,room_with_shining_obj
+5,repetition_room
+6,red_blue_choice_Room
+7,special_repetition_room
+8,empty_room_special
+9,plain_hallway
+10,dead_end
+11,room_with_ticking_sound
