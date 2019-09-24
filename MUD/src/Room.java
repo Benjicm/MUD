@@ -10,7 +10,8 @@ public class Room {
 	ArrayList<Integer> items;
 	ArrayList<Integer> chars;
 	ArrayList<Exit> exits;
-	Room()
+	
+	public Room()
 	{
 		ID = 0;
 		description = "";
@@ -18,7 +19,7 @@ public class Room {
 		chars = new ArrayList<Integer>();
 		exits = new ArrayList<Exit>();
 	}
-	Room(String desc, int ID)
+	public Room(String desc, int ID)
 	{
 		this.ID = ID;
 		description = desc;

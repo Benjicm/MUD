@@ -4,7 +4,7 @@ public class ItemList {
 	ArrayList<Item> items;
 	int nextID;
 	
-	ItemList()
+	public ItemList()
 	{
 		items = new ArrayList<Item>();
 		nextID = 0;

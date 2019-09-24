@@ -4,7 +4,7 @@ public class RoomList {
 	ArrayList<Room> rooms;
 	int nextID;
 	
-	RoomList()
+	public RoomList()
 	{
 		rooms = new ArrayList<Room>();
 		nextID = 0;

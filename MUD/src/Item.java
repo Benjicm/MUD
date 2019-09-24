@@ -7,7 +7,7 @@ public class Item {
 	boolean beingCarried;
 	int containerID;
 	
-	Item()
+	public Item()
 	{
 		name = "";
 		ID = 0;
@@ -15,7 +15,7 @@ public class Item {
 		beingCarried = false;
 		containerID = 0;
 	}
-	Item(String name, int ID, boolean carriable)
+	public Item(String name, int ID, boolean carriable)
 	{
 		this.name = name;
 		this.ID = ID;
@@ -23,7 +23,7 @@ public class Item {
 		beingCarried = false;
 		containerID = 0;
 	}
-	Item(String name, int ID, boolean carriable, boolean beingCarried, int containerID)
+	public Item(String name, int ID, boolean carriable, boolean beingCarried, int containerID)
 	{
 		this.name = name;
 		this.ID = ID;

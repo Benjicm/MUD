@@ -6,21 +6,21 @@ public class Character {
 	int currentRoom;
 	ArrayList<Integer> inventory;
 	
-	Character()
+	public Character()
 	{
 		name = "";
 		ID = 0;
 		currentRoom = 0;
 		inventory = new ArrayList<Integer>();
 	}
-	Character(String name, int ID)
+	public Character(String name, int ID)
 	{
 		this.name = name;
 		this.ID = ID;
 		currentRoom = 0;
 		inventory = new ArrayList<Integer>();
 	}
-	Character(String name, int ID, int startingRoom)
+	public Character(String name, int ID, int startingRoom)
 	{
 		this.name = name;
 		this.ID = ID;
