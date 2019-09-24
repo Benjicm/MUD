@@ -1,12 +1,12 @@
 
-public class GameManager {
+public class GameMaster {
 
 	RoomList rlist;
 	ItemList ilist;
 	boolean running = true;
 
 
-	public GameManager() {
+	public GameMaster() {
 
 
 
