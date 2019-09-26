@@ -92,7 +92,7 @@ public class GameMaster {
 	}
 	public String getInv(int charID)
 	{
-		String output = " You have these items:\n";
+		String output = "You have these items:\n";
 		ArrayList<Integer> inv = clist.getCharInv(charID);
 		for(int i = 0; i < inv.size(); i++)
 		{
@@ -101,6 +101,52 @@ public class GameMaster {
 			output = output + itemDesc;
 		}
 		return output;
+	}
+	public String pickUpItem(int charID, String itemName)
+	{
+		int roomID = clist.getCharLocation(charID);
+		ArrayList<Integer> items = ilist.findItemByName(itemName);
+		int itemID = 0;
+		for(int i = 0; i < items.size(); i++)
+		{
+			if(rlist.containsItem(roomID, items.get(i)))
+			{
+				itemID = items.get(i);
+			}
+		}
+		if(itemID == 0)
+		{
+			return "No such item exists.\n";
+		}
+		if(!ilist.isItemCarriable(itemID))
+		{
+			return "You can't pick that up!\n";
+		}
+		rlist.removeItem(roomID, itemID);
+		clist.addItem(charID, itemID);
+		ilist.setItemContainer(itemID, true, roomID);
+		return "You picked up a " + itemName + ".\n" + getInv(charID);
+	}
+	public String dropItem(int charID, String itemName)
+	{
+		int roomID = clist.getCharLocation(charID);
+		ArrayList<Integer> items = ilist.findItemByName(itemName);
+		int itemID = 0;
+		for(int i = 0; i < items.size(); i++)
+		{
+			if(clist.holdingItem(charID, items.get(i)))
+			{
+				itemID = items.get(i);
+			}
+		}
+		if(itemID == 0)
+		{
+			return "You don't have that item!\n";
+		}
+		clist.removeItem(charID, itemID);
+		rlist.addItem(roomID, itemID);
+		ilist.setItemContainer(itemID, false, roomID);
+		return "You dropped a " + itemName + ".\n" + getInv(charID);
 	}
 	public void run() {
 		

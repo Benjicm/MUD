@@ -57,6 +57,11 @@ public class ItemList {
 		int index = getItemIndex(itemID);
 		return items.get(index).isBeingCarried();
 	}
+	public boolean isItemCarriable(int itemID)
+	{
+		int index = getItemIndex(itemID);
+		return items.get(index).carriable;
+	}
 	public void setItemContainer(int itemID, boolean beingCarried, int containerID)
 	{
 		int index = getItemIndex(itemID);
