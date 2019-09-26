@@ -9,7 +9,7 @@ public class CharList {
 	{
 		chars = new ArrayList<Character>();
 		nextID = 0;
-		
+		addChar("");
 	}
 	private int getCharIndex(int charID)
 	{

@@ -9,9 +9,9 @@ public class GameMaster {
 
 
 	public GameMaster() {
-
-
-
+		rlist = new RoomList();
+		ilist = new ItemList();
+		clist = new CharList();
 	}
 
 	public void setup() {
@@ -89,6 +89,18 @@ public class GameMaster {
 	{
 		int roomID = clist.getCharLocation(charID);
 		return this.getRoomDesc(roomID);
+	}
+	public String getInv(int charID)
+	{
+		String output = " You have these items:\n";
+		ArrayList<Integer> inv = clist.getCharInv(charID);
+		for(int i = 0; i < inv.size(); i++)
+		{
+			String itemName = ilist.getItemName(inv.get(i));
+			String itemDesc = "A " + itemName + "\n";
+			output = output + itemDesc;
+		}
+		return output;
 	}
 	public void run() {
 		
