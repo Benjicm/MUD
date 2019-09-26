@@ -67,6 +67,50 @@ public class GameMaster {
 		}
 		return null;
 	}
+	private String getMovementDesc(String dir)
+	{
+		if(dir.equals(Exit.NORTH))
+		{
+			return "You take the exit to the north.\n";
+		}
+		else if(dir.equals(Exit.NORTHEAST))
+		{
+			return "You take the exit to the northeast.\n";
+		}
+		else if(dir.equals(Exit.EAST))
+		{
+			return "You take the exit to the east.\n";
+		}
+		else if(dir.equals(Exit.SOUTHEAST))
+		{
+			return "You take the exit to the southeast.\n";
+		}
+		else if(dir.equals(Exit.SOUTH))
+		{
+			return "You take the exit to the south.\n";
+		}
+		else if(dir.equals(Exit.SOUTHWEST))
+		{
+			return "You take the exit to the southwest.\n";
+		}
+		else if(dir.equals(Exit.WEST))
+		{
+			return "You take the exit to the west.\n";
+		}
+		else if(dir.equals(Exit.NORTHWEST))
+		{
+			return "You take the exit to the northwest.\n";
+		}
+		else if(dir.equals(Exit.UP))
+		{
+			return "You go up the stairs.\n";
+		}
+		else if(dir.equals(Exit.DOWN))
+		{
+			return "You go down the stairs.\n";
+		}
+		return null;
+	}
 	public String getRoomDesc(int roomID)
 	{
 		String output = rlist.getRoomDesc(roomID) + "\n";
@@ -147,6 +191,17 @@ public class GameMaster {
 		rlist.addItem(roomID, itemID);
 		ilist.setItemContainer(itemID, false, roomID);
 		return "You dropped a " + itemName + ".\n" + getInv(charID);
+	}
+	public String moveChar(int charID, String dir)
+	{
+		int roomID = clist.getCharLocation(charID);
+		if(!rlist.doesExitExist(roomID, dir))
+		{
+			return "You can't walk through walls.\n";
+		}
+		int newRoomID = rlist.moveChar(roomID, charID, dir);
+		clist.moveChar(charID, newRoomID);
+		return getMovementDesc(dir) + getRoomDesc(newRoomID);
 	}
 	public void run() {
 		

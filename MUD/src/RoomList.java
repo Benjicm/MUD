@@ -22,6 +22,16 @@ public class RoomList {
 		}
 		return 0;
 	}
+	public boolean doesExitExist(int roomID, String dir)
+	{
+		int i = getRoomIndex(roomID);
+		int exit = rooms.get(i).getConnectedRoomID(dir);
+		if(exit != 0)
+		{
+			return true;
+		}
+		return false;
+	}
 	public int addRoom(String desc)
 	{
 		Room r = new Room(desc, nextID);
