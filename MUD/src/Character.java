@@ -56,6 +56,11 @@ public class Character {
 	{
 		return inventory;
 	}
+	
+	/** Checks to see if this character is holding the item with ID itemID
+	 * @param itemID the ID of the item to look for
+	 * @return true if this character is holding the item, false if he isn't
+	 */
 	public boolean holdingItem(int itemID)
 	{
 		for(int i = 0; i < inventory.size(); i++)
@@ -67,6 +72,9 @@ public class Character {
 		}
 		return false;
 	}
+	/** Adds an item to this character's inventory
+	 * @param itemID the ID of the item to add
+	 */
 	public void addItem(int itemID)
 	{
 		if(!holdingItem(itemID))
@@ -74,6 +82,9 @@ public class Character {
 			inventory.add(itemID);
 		}
 	}
+	/** Removes an item from this character's inventory
+	 * @param itemID the ID of the item to remove
+	 */
 	public void removeItem(int itemID)
 	{
 		for(int i = 0; i < inventory.size(); i++)
@@ -85,6 +96,9 @@ public class Character {
 			}
 		}
 	}
+	/** Sets the room that this character is in
+	 * @param roomID The ID of the room to put the character in
+	 */
 	public void setRoom(int roomID)
 	{
 		currentRoom = roomID;
