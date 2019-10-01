@@ -28,18 +28,30 @@ public class Character {
 		inventory = new ArrayList<Integer>();
 	}
 	
+	/** Gets the name of this character
+	 * @return the character's name
+	 */
 	public String getName()
 	{
 		return name;
 	}
+	/** Gets the ID of this character 
+	 * @return the character's ID
+	 */
 	public int getID()
 	{
 		return ID;
 	}
+	/** Gets the ID of the room this character currently occupies
+	 * @return the ID of the room this character is in
+	 */
 	public int getRoom()
 	{
 		return currentRoom;
 	}
+	/** Gets the IDs of all the items in this character's inventory
+	 * @return ArrayList containing the ID of every item in the character's inventory
+	 */
 	public ArrayList<Integer> getInv()
 	{
 		return inventory;
