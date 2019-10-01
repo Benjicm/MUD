@@ -246,23 +246,34 @@ public class GameMaster {
 			
 			// second, check for a movement command.
 			else if(inputCommands[0].equals("move")) {
-				System.out.println(moveChar(1, inputCommands[1]));
+				// make sure there are atleast two arguments in the "inputCommands" variable, otherwise we would get array out of bounds exception
+				if(inputCommands.length > 1) {
+					System.out.println(moveChar(1, inputCommands[1]));
+				}
 			}
-			
-			
-			
+		
 			// third, check for the get command. 
 			else if (inputCommands[0].equals("get")) {
-				System.out.println(pickUpItem(1, inputCommands[1]));				
+				// same fix for arrayOutOfBounds exception
+				if(inputCommands.length > 1) {
+					System.out.println(pickUpItem(1, inputCommands[1]));	
+				}
 			}
 			
+			// fourth, check for the drop command
+			else if(inputCommands[0].equals("drop")) {
+				// same fix for arrayOutOfBounds exception
+				if(inputCommands.length > 1) {
+					System.out.println(dropItem(1, inputCommands[1]));
+				}
+			}
+			
+			// fifth, check for the inventory command
 			else if(inputCommands[0].equals("inventory") || inputCommands[0].equals("inv")) {
 				System.out.println(getInv(1));
 			}
 			
-			else if(inputCommands[0].equals("drop")) {
-				System.out.println(dropItem(1, inputCommands[1]));
-			}
+			
 			
 		}
 		
