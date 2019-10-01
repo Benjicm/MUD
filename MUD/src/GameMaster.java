@@ -246,7 +246,7 @@ public class GameMaster {
 			
 			// second, check for a movement command.
 			else if(inputCommands[0].equals("move")) {
-				// make sure there are atleast two arguments in the "inputCommands" variable, otherwise we would get array out of bounds exception
+				// make sure there are atleast two elements in the "inputCommands" array, otherwise we would get array out of bounds exception
 				if(inputCommands.length > 1) {
 					System.out.println(moveChar(1, inputCommands[1]));
 				}
