@@ -217,7 +217,7 @@ public class GameMaster {
 		}
 		int newRoomID = rlist.moveChar(roomID, charID, dir);
 		clist.moveChar(charID, newRoomID);
-		return getMovementDesc(dir) + getRoomDesc(newRoomID);
+		return getMovementDesc(dir);
 	}
 	public void run() {
 		
@@ -234,22 +234,35 @@ public class GameMaster {
 			System.out.println(this.getDescOfLocation(1));
 			String[] inputCommands = in.getInput();
 			
-			//temporary code to pass project 1 check
+			// all game logic should happen here
+			// eg: if the user said a direction, try to go in that direction
+			// if the user said "get" the next element in inputCommands should be the name of an item
+			
+			// first thing to check, the exit command. Closes the program by exiting the while loop.
 			if(inputCommands[0].equals("exit")) {
 				running = false;
 				System.out.println("Goodbye");
 			}
 			
-			else if (inputCommands[0].equals("get")) {
-				
-				
-				
-				
+			// second, check for a movement command.
+			else if(inputCommands[0].equals("move")) {
+				System.out.println(moveChar(1, inputCommands[1]));
 			}
-			// all game logic should happen here
-			// eg: if the user said a direction, try to go in that direction
-			// if the user said "get" the next element in inputCommands should be the name of an item
 			
+			
+			
+			// third, check for the get command. 
+			else if (inputCommands[0].equals("get")) {
+				System.out.println(pickUpItem(1, inputCommands[1]));				
+			}
+			
+			else if(inputCommands[0].equals("inventory") || inputCommands[0].equals("inv")) {
+				System.out.println(getInv(1));
+			}
+			
+			else if(inputCommands[0].equals("drop")) {
+				System.out.println(dropItem(1, inputCommands[1]));
+			}
 			
 		}
 		
