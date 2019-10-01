@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class CharTester {
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		GameMaster gm = new GameMaster();
 		gm.clist.addChar("Testman");
@@ -43,6 +43,6 @@ public class CharTester {
 		System.out.println(gm.dropItem(1, "statue"));
 		System.out.print(gm.dropItem(1, "apple"));
 		System.out.println(gm.getRoomDesc(1));
-		System.out.println(gm.getInv(1));*/
-	}
+		System.out.println(gm.getInv(1));
+	}*/
 }

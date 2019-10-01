@@ -1,7 +1,7 @@
 import java.util.*;
 public class ItemTester {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		/*Item i = new Item();
 		Item j = new Item("item", 1, true);
@@ -16,7 +16,7 @@ public class ItemTester {
 		System.out.println(i.isBeingCarried());
 		System.out.println(i.getContainerID());
 		System.out.println(j.isBeingCarried());
-		System.out.println(j.getContainerID());*/
+		System.out.println(j.getContainerID());
 		//Expected output:
 		//false
 		//1
@@ -36,6 +36,6 @@ public class ItemTester {
 		{
 			System.out.println(a.get(i));
 		}
-	}
+	}*/
 
 }

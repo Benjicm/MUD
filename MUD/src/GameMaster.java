@@ -26,11 +26,16 @@ public class GameMaster {
 		clist.addChar("Testman");
 		rlist.addRoom("You are in the first room.");
 		rlist.addRoom("You are in the second room.");
+		ilist.addItem("potion", true);
+		
+		
 		rlist.addExitToRoom(1, 2, Exit.NORTH);
 		rlist.addExitToRoom(2, 1, Exit.SOUTH);
 		// how to add items?
-		ilist.addItem("potion", true);
-		rlist.addItem(1, 2);
+		clist.moveChar(1, 1);
+		rlist.addChar(1, 1);
+		rlist.addItem(2, 1);
+		ilist.setItemContainer(1, false, 2);
 		
 	}
 
@@ -226,7 +231,7 @@ public class GameMaster {
 			// The first element in it is the first word inputed, second element is the second word. etc. 
 			// Its size is based off of how many words the user inputed. If the user just hits enter 
 			// without typing any commands, inputCommands should be an array of size 0
-			System.out.println(this.getRoomDesc(1));
+			System.out.println(this.getDescOfLocation(1));
 			String[] inputCommands = in.getInput();
 			
 			//temporary code to pass project 1 check

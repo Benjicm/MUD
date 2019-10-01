@@ -1,7 +1,7 @@
 
 public class ExitTester {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Room r = new Room();
 		r.addExit(1, Exit.NORTH);
@@ -39,6 +39,6 @@ public class ExitTester {
 		//4
 		//5
 		
-	}
+	}*/
 
 }

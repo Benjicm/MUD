@@ -2,7 +2,7 @@ import java.util.*;
 
 public class RoomTester {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		/*Room r = new Room();
 		r.addItem(1);
@@ -11,7 +11,7 @@ public class RoomTester {
 		System.out.println(r.containsItem(1));
 		System.out.println(r.containsItem(2));
 		System.out.println(r.containsItem(3));
-		System.out.println(r.containsItem(4));*/
+		System.out.println(r.containsItem(4));
 		RoomList rooms = new RoomList();
 		int firstID = rooms.addRoom("This is the first room.");
 		int secondID = rooms.addRoom("This is the second room.");
@@ -48,6 +48,6 @@ public class RoomTester {
 		System.out.println(rooms.containsChar(secondID, 1));
 		System.out.println("Room 2 contains char 2: ");
 		System.out.println(rooms.containsChar(secondID, 2));
-	}
+	}*/
 
 }
