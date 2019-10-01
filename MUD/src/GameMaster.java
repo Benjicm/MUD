@@ -16,11 +16,22 @@ public class GameMaster {
 
 	public void setup() {
 		// this reads in data from the text files provided in the SetupFiles folder
-		rlist = SetupFileReader.setupRooms("SetupFiles" + SetupFileReader.fileSeparator + "Roomlist.txt");
-		SetupFileReader.setupExits("SetupFiles" + SetupFileReader.fileSeparator + "Exitlist.txt", rlist);
-		SetupFileReader.setupItems("SetupFiles" + SetupFileReader.fileSeparator + "Itemlist.txt", rlist);
+		//rlist = SetupFileReader.setupRooms("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Roomlist.txt");
+		//SetupFileReader.setupExits("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Exitlist.txt", rlist);
+		//SetupFileReader.setupItems("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Itemlist.txt", rlist);
 		
 		// the setup() method still needs something to initialize the player
+		
+		// test stuff: 
+		clist.addChar("Testman");
+		rlist.addRoom("You are in the first room.");
+		rlist.addRoom("You are in the second room.");
+		rlist.addExitToRoom(1, 2, Exit.NORTH);
+		rlist.addExitToRoom(2, 1, Exit.SOUTH);
+		// how to add items?
+		ilist.addItem("potion", true);
+		rlist.addItem(1, 2);
+		
 	}
 
 	private String getExitDesc(String dir)
@@ -215,14 +226,25 @@ public class GameMaster {
 			// The first element in it is the first word inputed, second element is the second word. etc. 
 			// Its size is based off of how many words the user inputed. If the user just hits enter 
 			// without typing any commands, inputCommands should be an array of size 0
-			
+			System.out.println(this.getRoomDesc(1));
 			String[] inputCommands = in.getInput();
-		
+			
+			//temporary code to pass project 1 check
+			if(inputCommands[0].equals("exit")) {
+				running = false;
+				System.out.println("Goodbye");
+			}
+			
+			else if (inputCommands[0].equals("get")) {
+				
+				
+				
+				
+			}
 			// all game logic should happen here
 			// eg: if the user said a direction, try to go in that direction
 			// if the user said "get" the next element in inputCommands should be the name of an item
 			
-			System.out.println("user input recieved");
 			
 		}
 		
