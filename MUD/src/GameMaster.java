@@ -238,8 +238,13 @@ public class GameMaster {
 			// eg: if the user said a direction, try to go in that direction
 			// if the user said "get" the next element in inputCommands should be the name of an item
 			
+			// makes sure they enter something
+			if( inputCommands.length <= 0) {
+				System.out.println("Please enter a command");
+			}
+			
 			// first thing to check, the exit command. Closes the program by exiting the while loop.
-			if(inputCommands[0].equals("exit")) {
+			else if(inputCommands[0].equals("exit")) {
 				running = false;
 				System.out.println("Goodbye");
 			}
