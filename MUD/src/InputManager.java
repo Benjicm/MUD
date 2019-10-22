@@ -13,8 +13,11 @@ public class InputManager {
 
 	}
 
-
-	public String[] getInput() {
+	
+	
+	
+	
+	public String[] getTextInput() {
 
 		String in = s.nextLine();
 		char[] chars = new char[in.length()];

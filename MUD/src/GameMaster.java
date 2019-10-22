@@ -232,7 +232,7 @@ public class GameMaster {
 			// Its size is based off of how many words the user inputed. If the user just hits enter 
 			// without typing any commands, inputCommands should be an array of size 0
 			System.out.println(this.getDescOfLocation(1));
-			String[] inputCommands = in.getInput();
+			String[] inputCommands = in.getTextInput();
 			
 			// all game logic should happen here
 			// eg: if the user said a direction, try to go in that direction
