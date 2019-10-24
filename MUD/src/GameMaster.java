@@ -1,4 +1,8 @@
+import java.awt.Container;
+import java.awt.Dimension;
 import java.util.*;
+
+import javax.swing.JFrame;
 
 public class GameMaster {
 
@@ -36,6 +40,10 @@ public class GameMaster {
 		rlist.addChar(1, 1);
 		rlist.addItem(2, 1);
 		ilist.setItemContainer(1, false, 2);
+		
+		
+		
+		
 		
 	}
 
@@ -222,6 +230,15 @@ public class GameMaster {
 	public void run() {
 		
 		InputManager in = new InputManager();
+		JFrame tWindow = new JFrame();
+		Container tPane = tWindow.getContentPane();
+		tPane.setPreferredSize(new Dimension(500, 300));
+		tPane.add(in);
+		
+		tWindow.pack();
+		tWindow.setLocation(200, 200);
+		tWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tWindow.setVisible(true);
 		
 		while(running) {
 			
