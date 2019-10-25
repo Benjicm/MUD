@@ -19,7 +19,7 @@ public class InputManager extends JPanel{
 	private JPanel inputTextBox;
 	private JPanel roomImageDisplay;
 	private JPanel itemList;
-	private JPanel mobList;
+	private JPanel roomNameBox;
 
 	// this boolean toggles whether it should print out info based about the contents of the commands entered.
 	private final boolean printCommandInfo = false; 
@@ -68,11 +68,9 @@ public class InputManager extends JPanel{
 		// note we might switch this to a graphics pane just for the sake of simplicity.
 		roomImageDisplay = new JPanel(new GridLayout());
 
-		
-		
-		
+
 		// There will be a section that lists the user's inventory
-		itemList = new JPanel(new GridLayout(0,1));
+		itemList = new JPanel(new GridLayout(2,2));
 		itemList.add(new JButton("Item1"));
 		itemList.add(new JButton("Item2"));
 		itemList.add(new JButton("Item3"));
@@ -80,12 +78,10 @@ public class InputManager extends JPanel{
 
 		
 		// Maybe even a section that lists mobs in the current Room
-		mobList = new JPanel(new GridLayout(1,0));
-		mobList.add(new JButton("Mob1"));
-		mobList.add(new JButton("Mob2"));
-		mobList.add(new JButton("Mob3"));
-		mobList.add(new JButton("Mob4"));
-		
+		roomNameBox = new JPanel(new GridLayout(1,0));
+		JTextField roomName = new JTextField("Room name");
+		roomName.setEditable(false);
+		roomNameBox.add(roomName);
 		
 	
 		// It is important to note that each 'section' described here is its own JPanel of some kind that defines the layout
@@ -96,7 +92,7 @@ public class InputManager extends JPanel{
 		this.add(inputTextBox,BorderLayout.PAGE_END);
 		this.add(roomImageDisplay, BorderLayout.CENTER);
 		this.add(itemList,  BorderLayout.LINE_END);
-		this.add(mobList, BorderLayout.PAGE_START);
+		this.add(roomNameBox, BorderLayout.PAGE_START);
 		
 		
 
