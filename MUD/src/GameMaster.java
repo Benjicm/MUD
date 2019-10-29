@@ -28,8 +28,8 @@ public class GameMaster {
 		
 		// test stuff: 
 		clist.addChar("Testman");
-		rlist.addRoom("You are in the first room.");
-		rlist.addRoom("You are in the second room.");
+		rlist.addRoom("Room 1","You are in the first room.");
+		rlist.addRoom("Room 2","You are in the second room.");
 		ilist.addItem("potion", true);
 		
 		
@@ -242,6 +242,40 @@ public class GameMaster {
 			return this.dropItem(c.getCharID(), c.getParam());
 		}
 		return "invalid command";
+	}
+	private GameStateInfo createInfo(int charID, int roomID)
+	{
+		String roomName = rlist.getRoomName(roomID);
+		String roomDesc = rlist.getRoomDesc(roomID);
+		ArrayList<String> inventory = new ArrayList<String>();
+		ArrayList<Integer> invIDs = clist.getCharInv(charID);
+		ArrayList<Exit> exitIDs = rlist.getRoomExits(roomID);
+		ArrayList<String> exits = new ArrayList<String>();
+		ArrayList<Integer> roomItemIDs = rlist.getRoomItems(roomID);
+		ArrayList<String> roomItems = new ArrayList<String>();
+		ArrayList<Integer> charIDs = rlist.getRoomChars(roomID);
+		ArrayList<String> charNames = new ArrayList<String>();
+		for(int i = 0; i < invIDs.size(); i++)
+		{
+			String itemName = ilist.getItemName(invIDs.get(i));
+			inventory.add(itemName);
+		}
+		for(int i = 0; i < exitIDs.size(); i++)
+		{
+			String exitDir = exitIDs.get(i).getDir();
+			exits.add(exitDir);
+		}
+		for(int i = 0; i < roomItemIDs.size(); i++)
+		{
+			String itemName = ilist.getItemName(invIDs.get(i));
+			roomItems.add(itemName);
+		}
+		for(int i = 0; i < charIDs.size(); i++)
+		{
+			String charName = clist.getCharName(charIDs.get(i));
+		}
+		GameStateInfo out = new GameStateInfo(charID, roomName, roomDesc, inventory, exits, roomItems, charNames);
+		return out;
 	}
 	public void run() {
 		

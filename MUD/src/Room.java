@@ -5,6 +5,7 @@ import java.util.*;
  *
  */
 public class Room {
+	String name;
 	String description;
 	int ID;
 	ArrayList<Integer> items;
@@ -19,15 +20,19 @@ public class Room {
 		chars = new ArrayList<Integer>();
 		exits = new ArrayList<Exit>();
 	}
-	public Room(String desc, int ID)
+	public Room(String name, String desc, int ID)
 	{
 		this.ID = ID;
+		this.name = name;
 		description = desc;
 		items = new ArrayList<Integer>();
 		chars = new ArrayList<Integer>();
 		exits = new ArrayList<Exit>();
 	}
-	
+	public String getName()
+	{
+		return name;
+	}
 	/** Gets the description of the room.
 	 * @return the description of the room
 	 */
