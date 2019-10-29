@@ -2,8 +2,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -51,13 +49,6 @@ public class InputManager extends JPanel{
 			exitList.add(j);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
 		// There will be a section that contains the textbox/JTextField that the user inputs commands on
 		inputTextBox = new JPanel(new GridLayout());
 		JTextField inBox = new JTextField(10);
@@ -70,14 +61,17 @@ public class InputManager extends JPanel{
 
 
 		// There will be a section that lists the user's inventory
-		itemList = new JPanel(new GridLayout(2,2));
+		itemList = new JPanel(new GridLayout(0,1));
+		JTextField inventoryTitle = new JTextField("Inventory");
+		inventoryTitle.setEditable(false);
+		itemList.add(inventoryTitle);
 		itemList.add(new JButton("Item1"));
 		itemList.add(new JButton("Item2"));
 		itemList.add(new JButton("Item3"));
 		itemList.add(new JButton("Item4"));
 
 		
-		// Maybe even a section that lists mobs in the current Room
+		// There will be a section that reads out the current name of the room
 		roomNameBox = new JPanel(new GridLayout(1,0));
 		JTextField roomName = new JTextField("Room name");
 		roomName.setEditable(false);
