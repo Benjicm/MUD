@@ -8,7 +8,7 @@ public class RoomList {
 	{
 		rooms = new ArrayList<Room>();
 		nextID = 0;
-		addRoom("");
+		addRoom("","");
 	}
 	
 	private int getRoomIndex(int roomID)
@@ -32,9 +32,9 @@ public class RoomList {
 		}
 		return false;
 	}
-	public int addRoom(String desc)
+	public int addRoom(String name, String desc)
 	{
-		Room r = new Room(desc, nextID);
+		Room r = new Room(name, desc, nextID);
 		rooms.add(r);
 		nextID++;
 		return r.getID();
@@ -47,6 +47,15 @@ public class RoomList {
 			return null;
 		}
 		return rooms.get(i).getDesc();
+	}
+	public String getRoomName(int roomID)
+	{
+		int i = getRoomIndex(roomID);
+		if(i == 0)
+		{
+			return null;
+		}
+		return rooms.get(i).getName();
 	}
 	public ArrayList<Integer> getRoomItems(int roomID)
 	{
