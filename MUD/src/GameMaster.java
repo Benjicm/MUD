@@ -227,6 +227,22 @@ public class GameMaster {
 		clist.moveChar(charID, newRoomID);
 		return getMovementDesc(dir);
 	}
+	public String interpretCommand(Command c)
+	{
+		if(c.getAction() == Command.MOVE)
+		{
+			return this.moveChar(c.getCharID(), c.getParam());
+		}
+		if(c.getAction() == Command.GET)
+		{
+			return this.pickUpItem(c.getCharID(), c.getParam());
+		}
+		if(c.getAction() == Command.DROP)
+		{
+			return this.dropItem(c.getCharID(), c.getParam());
+		}
+		return "invalid command";
+	}
 	public void run() {
 		
 		InputManager in = new InputManager();
