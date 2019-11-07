@@ -18,14 +18,12 @@ public class InputManager extends JPanel{
 	private JPanel roomImageDisplay;
 	private JPanel itemList;
 	private JPanel roomNameBox;
-
+	private int charID;
 	// this boolean toggles whether it should print out info based about the contents of the commands entered.
 	private final boolean printCommandInfo = false; 
 
 
 	public InputManager() {
-
-
 
 
 		// Alright here we go, so lets break this down into pseudo-code
@@ -37,7 +35,7 @@ public class InputManager extends JPanel{
 		super(new BorderLayout());
 
 		// For example. there will be a section that contains a list of all the exits in the current room, 
-
+		this.charID = 1;
 		exitList = new JPanel(new GridLayout(3,5));
 		
 		/*
@@ -125,7 +123,7 @@ public class InputManager extends JPanel{
 	 * to accurately reflect the state. 
 	 * @param gameStateData an array containing arrays of strings that represent the data in this game.
 	 */
-	public void updateUI(String[][] gameStateData) {
+	public void updateUI(GameStateInfo gameStateData) {
 		// ok this method is going to eventually recreate the contents of the UI.
 
 
@@ -146,7 +144,7 @@ public class InputManager extends JPanel{
 		roomNameBox = new JPanel(new GridLayout(1,0));
 		
 		// create a JTextField that uses the string containing the room name in gameStateData
-		JTextField roomName = new JTextField("Room name");
+		JTextField roomName = new JTextField(gameStateData.getRoomName());
 		
 		// set it so that the text field is not editable. that is so that it is static
 		roomName.setEditable(false);
@@ -172,7 +170,7 @@ public class InputManager extends JPanel{
 	 * This method will stop execution temporarily because it relies on the Scanner class' nextLine() method.
 	 * @return returns an array of strings where each element is a single word entered by the user into the console.
 	 */
-	public String[] getTextInput() {
+	public Command getTextInput() {
 
 		String in = s.nextLine();
 		char[] chars = new char[in.length()];
@@ -226,9 +224,86 @@ public class InputManager extends JPanel{
 				System.out.println(s);
 			}
 
-			System.out.println("Actuall Command Count: " + commandCount);
+			System.out.println("Actual Command Count: " + commandCount);
 		}
-		return returnedIn;
+		Command out = createCommand(returnedIn);
+		return out;
+	}
+	public Command createCommand(String[] commandText)
+	{
+		String action = commandText[0];
+		int actionType = interpretAction(action);
+		String param = "";
+		for(int i = 1; i < commandText.length; i++)
+		{
+			param += commandText[i];
+		}
+		if(actionType == Command.MOVE)
+		{
+			param = interpretDirection(param);
+		}
+		return new Command(actionType, this.charID, param);
+	}
+	public int interpretAction(String action)
+	{
+		action = action.toLowerCase();
+		if(action.equals("move"))
+		{
+			return Command.MOVE;
+		}
+		else if(action.equals("get") || action.equals("grab"))
+		{
+			return Command.GET;
+		}
+		else if(action.equals("drop"))
+		{
+			return Command.DROP;
+		}
+		else
+		{
+			return 3;
+		}
+		
+	}
+	public String interpretDirection(String dir)
+	{
+		dir = dir.toLowerCase();
+		if(dir.equals("north") || dir.equals("n"))
+		{
+			return Command.NORTH;
+		}
+		else if(dir.equals("northeast") || dir.equals("ne"))
+		{
+			return Command.NORTHEAST;
+		}
+		else if(dir.equals("east") || dir.equals("e"))
+		{
+			return Command.EAST;
+		}
+		else if(dir.equals("southeast") || dir.equals("se"))
+		{
+			return Command.SOUTHEAST;
+		}
+		else if(dir.equals("south") || dir.equals("s"))
+		{
+			return Command.SOUTH;
+		}
+		else if(dir.equals("southwest") || dir.equals("sw"))
+		{
+			return Command.SOUTHWEST;
+		}
+		else if(dir.equals("west") || dir.equals("w"))
+		{
+			return Command.WEST;
+		}
+		else if(dir.equals("northwest") || dir.equals("nw"))
+		{
+			return Command.NORTHWEST;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 

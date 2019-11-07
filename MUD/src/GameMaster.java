@@ -170,7 +170,7 @@ public class GameMaster {
 		}
 		return output;
 	}
-	public String pickUpItem(int charID, String itemName)
+	public GameStateInfo pickUpItem(int charID, String itemName)
 	{
 		int roomID = clist.getCharLocation(charID);
 		ArrayList<Integer> items = ilist.findItemByName(itemName);
@@ -184,18 +184,18 @@ public class GameMaster {
 		}
 		if(itemID == 0)
 		{
-			return "No such item exists.\n";
+			return null;
 		}
 		if(!ilist.isItemCarriable(itemID))
 		{
-			return "You can't pick that up!\n";
+			return null;
 		}
 		rlist.removeItem(roomID, itemID);
 		clist.addItem(charID, itemID);
 		ilist.setItemContainer(itemID, true, roomID);
-		return "You picked up a " + itemName + ".\n" + getInv(charID);
+		return createInfo(charID, roomID);
 	}
-	public String dropItem(int charID, String itemName)
+	public GameStateInfo dropItem(int charID, String itemName)
 	{
 		int roomID = clist.getCharLocation(charID);
 		ArrayList<Integer> items = ilist.findItemByName(itemName);
@@ -209,25 +209,25 @@ public class GameMaster {
 		}
 		if(itemID == 0)
 		{
-			return "You don't have that item!\n";
+			return null;
 		}
 		clist.removeItem(charID, itemID);
 		rlist.addItem(roomID, itemID);
 		ilist.setItemContainer(itemID, false, roomID);
-		return "You dropped a " + itemName + ".\n" + getInv(charID);
+		return createInfo(charID, roomID);
 	}
-	public String moveChar(int charID, String dir)
+	public GameStateInfo moveChar(int charID, String dir)
 	{
 		int roomID = clist.getCharLocation(charID);
 		if(!rlist.doesExitExist(roomID, dir))
 		{
-			return "You can't walk through walls.\n";
+			return null;
 		}
 		int newRoomID = rlist.moveChar(roomID, charID, dir);
 		clist.moveChar(charID, newRoomID);
-		return getMovementDesc(dir);
+		return createInfo(charID, newRoomID);
 	}
-	public String interpretCommand(Command c)
+	public GameStateInfo interpretCommand(Command c)
 	{
 		if(c.getAction() == Command.MOVE)
 		{
@@ -241,7 +241,7 @@ public class GameMaster {
 		{
 			return this.dropItem(c.getCharID(), c.getParam());
 		}
-		return "invalid command";
+		return null;
 	}
 	private GameStateInfo createInfo(int charID, int roomID)
 	{
