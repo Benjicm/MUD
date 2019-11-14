@@ -273,7 +273,7 @@ public class GameMaster {
 		}
 		for(int i = 0; i < roomItemIDs.size(); i++)
 		{
-			String itemName = ilist.getItemName(invIDs.get(i));
+			String itemName = ilist.getItemName(roomItemIDs.get(i));
 			roomItems.add(itemName);
 		}
 		for(int i = 0; i < charIDs.size(); i++)
@@ -309,7 +309,13 @@ public class GameMaster {
 			
 			try {
 				currentCommand = commandQueue.take();
-				interpretCommand(currentCommand);
+				GameStateInfo newGameState = interpretCommand(currentCommand);
+				
+				
+				in.updateUI(newGameState);
+				
+				
+				
 				System.out.println("Command recieved!");
 				System.out.println("Command info:  ActionID: " + currentCommand.getAction() + " Parameter: " + currentCommand.getParam() + " CharID: " + currentCommand.getCharID());
 				System.out.println(getDescOfLocation(currentCommand.getCharID()));

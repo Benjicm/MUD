@@ -166,19 +166,14 @@ public class InputManager extends JPanel{
 
 		//pseudo code time:
 
-		// reInitialize roomNameBox as a new JPanel with gridLayout.
-		roomNameBox = new JPanel(new GridLayout(1,0));
+		// alright, so here we go, we find the component inside of roomNameBox and cast it to a JTextField (it only should ever be a JTextField)
+		// then we just set its text to the 
+		JTextField roomName = (JTextField) roomNameBox.getComponent(0);
+		roomName.setText(gameStateData.getRoomName());
 		
-		// create a JTextField that uses the string containing the room name in gameStateData
-		JTextField roomName = new JTextField(gameStateData.getRoomName());
+		 
 		
-		// set it so that the text field is not editable. that is so that it is static
-		roomName.setEditable(false);
-		
-		// finally add it to the JPanel at the top
-		roomNameBox.add(roomName);
-
-
+	
 
 
 
