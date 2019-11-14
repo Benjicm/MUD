@@ -1,6 +1,9 @@
 import java.awt.Container;
 import java.awt.Dimension;
+import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JFrame;
 
@@ -9,6 +12,8 @@ public class GameMaster {
 	RoomList rlist;
 	ItemList ilist;
 	CharList clist;
+	private BlockingQueue<Command> commandQueue;
+	
 	boolean running = true;
 
 
@@ -16,6 +21,7 @@ public class GameMaster {
 		rlist = new RoomList();
 		ilist = new ItemList();
 		clist = new CharList();
+		commandQueue = new ArrayBlockingQueue<Command>(100);
 	}
 
 	public void setup() {
@@ -279,7 +285,7 @@ public class GameMaster {
 	}
 	public void run() {
 		
-		InputManager in = new InputManager();
+		InputManager in = new InputManager(commandQueue);
 		JFrame tWindow = new JFrame();
 		Container tPane = tWindow.getContentPane();
 		tPane.setPreferredSize(new Dimension(500, 300));
@@ -298,52 +304,28 @@ public class GameMaster {
 			// The first element in it is the first word inputed, second element is the second word. etc. 
 			// Its size is based off of how many words the user inputed. If the user just hits enter 
 			// without typing any commands, inputCommands should be an array of size 0
-			System.out.println(this.getDescOfLocation(1));
-			String[] inputCommands = in.getTextInput();
+		
+			Command currentCommand;
+			
+			try {
+				currentCommand = commandQueue.take();
+				interpretCommand(currentCommand);
+				System.out.println("Command recieved!");
+				System.out.println("Command info:  ActionID: " + currentCommand.getAction() + " Parameter: " + currentCommand.getParam() + " CharID: " + currentCommand.getCharID());
+				System.out.println(getDescOfLocation(currentCommand.getCharID()));
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
+			
 			
 			// all game logic should happen here
 			// eg: if the user said a direction, try to go in that direction
 			// if the user said "get" the next element in inputCommands should be the name of an item
 			
 			// makes sure they enter something
-			if( inputCommands.length <= 0) {
-				System.out.println("Please enter a command");
-			}
 			
-			// first thing to check, the exit command. Closes the program by exiting the while loop.
-			else if(inputCommands[0].equals("exit")) {
-				running = false;
-				System.out.println("Goodbye");
-			}
-			
-			// second, check for a movement command.
-			else if(inputCommands[0].equals("move")) {
-				// make sure there are atleast two elements in the "inputCommands" array, otherwise we would get array out of bounds exception
-				if(inputCommands.length > 1) {
-					System.out.println(moveChar(1, inputCommands[1]));
-				}
-			}
-		
-			// third, check for the get command. 
-			else if (inputCommands[0].equals("get")) {
-				// same fix for arrayOutOfBounds exception
-				if(inputCommands.length > 1) {
-					System.out.println(pickUpItem(1, inputCommands[1]));	
-				}
-			}
-			
-			// fourth, check for the drop command
-			else if(inputCommands[0].equals("drop")) {
-				// same fix for arrayOutOfBounds exception
-				if(inputCommands.length > 1) {
-					System.out.println(dropItem(1, inputCommands[1]));
-				}
-			}
-			
-			// fifth, check for the inventory command
-			else if(inputCommands[0].equals("inventory") || inputCommands[0].equals("inv")) {
-				System.out.println(getInv(1));
-			}
 			
 			
 			

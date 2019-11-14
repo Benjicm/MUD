@@ -2,7 +2,11 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -12,7 +16,7 @@ public class InputManager extends JPanel{
 
 	private Scanner s;
 
-
+	private BlockingQueue<Command> commandQueue;
 	private JPanel exitList;
 	private JPanel inputTextBox;
 	private JPanel roomImageDisplay;
@@ -23,8 +27,11 @@ public class InputManager extends JPanel{
 	private final boolean printCommandInfo = false; 
 
 
-	public InputManager() {
-
+	public InputManager(BlockingQueue<Command> commandQueue) {
+		
+		
+	
+	
 
 		// Alright here we go, so lets break this down into pseudo-code
 		// First things first, the InputManager is itself a Jpanel, will be a second-from-the-top level container
@@ -34,6 +41,10 @@ public class InputManager extends JPanel{
 		// This will contain chunked off sections that contain groups of UI pieces.
 		super(new BorderLayout());
 
+		// Somewhat out of place intializaation of the BlockingQueue field
+		this.commandQueue = commandQueue;
+		
+		
 		// For example. there will be a section that contains a list of all the exits in the current room, 
 		this.charID = 1;
 		exitList = new JPanel(new GridLayout(3,5));
@@ -54,6 +65,21 @@ public class InputManager extends JPanel{
 		// There will be a section that contains the textbox/JTextField that the user inputs commands on
 		inputTextBox = new JPanel(new GridLayout());
 		JTextField inBox = new JTextField(10);
+		
+		ActionListener inBoxListener  = (e) -> {
+			JTextField f = (JTextField)e.getSource();
+			try {
+				commandQueue.put(getTextInput(f.getText()));
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			
+		};
+		inBox.addActionListener(inBoxListener);
+		
+		
+		
+		
 		inputTextBox.add(inBox);
 		inBox.setPreferredSize(new Dimension(200, 100));
 
@@ -170,9 +196,9 @@ public class InputManager extends JPanel{
 	 * This method will stop execution temporarily because it relies on the Scanner class' nextLine() method.
 	 * @return returns an array of strings where each element is a single word entered by the user into the console.
 	 */
-	public Command getTextInput() {
+	public Command getTextInput(String in) {
 
-		String in = s.nextLine();
+		
 		char[] chars = new char[in.length()];
 		for(int i = 0; i < in.length(); i++) {
 			chars[i] = in.charAt(i);

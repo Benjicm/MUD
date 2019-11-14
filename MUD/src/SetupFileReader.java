@@ -55,7 +55,7 @@ public class SetupFileReader {
 				
 				// Room description Code
 				String description = line.substring(first+1);
-				rlist.addRoom(description);
+				//rlist.addRoom(description);
 				
 				
 			}
