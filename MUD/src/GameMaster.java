@@ -295,7 +295,7 @@ public class GameMaster {
 		tWindow.setLocation(200, 200);
 		tWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tWindow.setVisible(true);
-		
+		in.updateUI(createInfo(1, 1));
 		while(running) {
 			
 		

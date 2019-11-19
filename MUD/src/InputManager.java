@@ -1,155 +1,149 @@
 
-	import java.awt.BorderLayout;
-	import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-	import java.awt.event.ActionListener;
-	import java.math.BigInteger;
-	import java.util.Scanner;
-	import java.util.concurrent.BlockingQueue;
-	
-	import javax.swing.JButton;
-	import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-	
-	
-	public class InputManager extends JPanel{
-	
-		private Scanner s;
-	
-		private BlockingQueue<Command> commandQueue;
-		private JPanel exitList;
-		private JPanel inOutTextBox;
-		private JPanel roomImageDisplay;
-		private JPanel itemList;
-		private JPanel roomNameBox;
-		private int charID;
-		// this boolean toggles whether it should print out info based about the contents of the commands entered.
-		private final boolean printCommandInfo = false; 
-	
-	
-		public InputManager(BlockingQueue<Command> commandQueue) {
-			
-			
-		
-		
-	
-			// Alright here we go, so lets break this down into pseudo-code
-			// First things first, the InputManager is itself a Jpanel, will be a second-from-the-top level container
-			// outside of inputManager, it is added to a JFrame window somewhere in the GameMaster's Run method.
-	
-			// Anyways, Inside of this class, we have one main layout manager, "BorderLayout". 
-			// This will contain chunked off sections that contain groups of UI pieces.
-			super(new BorderLayout());
-	
-			// Somewhat out of place intializaation of the BlockingQueue field
-			this.commandQueue = commandQueue;
-			
-			
-			// For example. there will be a section that contains a list of all the exits in the current room, 
-			this.charID = 1;
-			exitList = new JPanel(new GridLayout(3,5));
-			
-			/*
-			JButton[] directionButtonList = new JButton[] {
-					new JButton("NW"), new JButton("N"), new JButton("NE"), new JButton(""), new JButton("UP"),
-					new JButton("W"),  new JButton(""),  new JButton("E"),  new JButton(""), new JButton(""),
-					new JButton("SW"), new JButton("S"), new JButton("SE"), new JButton(""), new JButton("D")
-			};
-	
-			for(JButton j : directionButtonList) {
-				j.setPreferredSize(new Dimension(31, 5));
-				exitList.add(j);
-			}
-			*/
-	
-			// There will be a section that contains the textbox/JTextField that the user inputs commands on
-			inOutTextBox = new JPanel(new GridBagLayout());
-			
-			
-			
-			JTextArea outBox = new JTextArea();
-			outBox.setEditable(false);
-			outBox.setPreferredSize(new Dimension(200, 100));
-			GridBagConstraints c = new GridBagConstraints();
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.weightx = 1.0;
-			c.gridwidth = 3;
-			c.gridx = 0;
-			c.gridy = 0;
-			inOutTextBox.add(outBox,c);
-			
-		
-			JTextField inBox = new JTextField(10);
-			
-			ActionListener inBoxListener  = (e) -> {
-				JTextField f = (JTextField)e.getSource();
-				try {
-					commandQueue.put(getTextInput(f.getText()));
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				
-			};
-			inBox.addActionListener(inBoxListener);
 
-			
-			
-			
-			c.gridy = 1;
-			
-			
-			inOutTextBox.add(inBox,c);
-			inBox.setPreferredSize(new Dimension(200, 30));
-			
-			
-			
-			
-			
-			
-	
-			// There will be a section that uses an image to display the current room
-			// note we might switch this to a graphics pane just for the sake of simplicity.
-			roomImageDisplay = new JPanel(new GridLayout());
-	
-	
-			// There will be a section that lists the user's inventory
-			
-			itemList = new JPanel(new GridLayout(0,1));
-			JTextField inventoryTitle = new JTextField("Inventory");
-			inventoryTitle.setEditable(false);
-			itemList.add(inventoryTitle);
-			/*
+
+public class InputManager extends JPanel{
+
+
+
+	private static String lineSeparator = System.lineSeparator();
+
+
+	private BlockingQueue<Command> commandQueue;
+	private JPanel exitList;
+	private JPanel inOutTextBox;
+	private JPanel roomImageDisplay;
+	private JPanel itemList;
+	private JPanel roomNameBox;
+	private int charID;
+	// this boolean toggles whether it should print out info based about the contents of the commands entered.
+	private final boolean printCommandInfo = false; 
+
+
+	public InputManager(BlockingQueue<Command> commandQueue) {
+
+
+
+
+
+		// Alright here we go, so lets break this down into pseudo-code
+		// First things first, the InputManager is itself a Jpanel, will be a second-from-the-top level container
+		// outside of inputManager, it is added to a JFrame window somewhere in the GameMaster's Run method.
+
+		// Anyways, Inside of this class, we have one main layout manager, "BorderLayout". 
+		// This will contain chunked off sections that contain groups of UI pieces.
+		super(new BorderLayout());
+
+		// Somewhat out of place intializaation of the BlockingQueue field
+		this.commandQueue = commandQueue;
+
+
+		// For example. there will be a section that contains a list of all the exits in the current room, 
+		this.charID = 1;
+		
+		exitList = new JPanel(new GridBagLayout());
+		
+		
+		
+		
+		// There will be a section that contains the textbox/JTextField that the user inputs commands on
+		inOutTextBox = new JPanel(new GridBagLayout());
+
+
+
+		JTextArea outBox = new JTextArea();
+		outBox.setEditable(false);
+		outBox.setPreferredSize(new Dimension(200, 100));
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1.0;
+		c.gridwidth = 3;
+		c.gridx = 0;
+		c.gridy = 0;
+		inOutTextBox.add(outBox,c);
+
+
+		JTextField inBox = new JTextField(10);
+
+		ActionListener inBoxListener  = (e) -> {
+			JTextField f = (JTextField)e.getSource();
+			try {
+				commandQueue.put(getTextInput(f.getText()));
+				f.setText("");
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+
+		};
+		inBox.addActionListener(inBoxListener);
+
+
+
+
+		c.gridy = 1;
+
+
+		inOutTextBox.add(inBox,c);
+		inBox.setPreferredSize(new Dimension(200, 30));
+
+
+
+
+
+
+
+		// There will be a section that uses an image to display the current room
+		// note we might switch this to a graphics pane just for the sake of simplicity.
+		roomImageDisplay = new JPanel(new GridLayout());
+
+
+		// There will be a section that lists the user's inventory
+
+		itemList = new JPanel(new GridBagLayout());
+		JTextField inventoryTitle = new JTextField("Inventory:");
+		inventoryTitle.setEditable(false);
+		itemList.add(inventoryTitle);
+		/*
 			itemList.add(new JButton("Item1"));
 			itemList.add(new JButton("Item2"));
 			itemList.add(new JButton("Item3"));
 			itemList.add(new JButton("Item4"));
-			 */
-	
-			// There will be a section that reads out the current name of the room
-			roomNameBox = new JPanel(new GridLayout(1,0));
-			JTextField roomName = new JTextField("Room name");
-			roomName.setEditable(false);
-			roomNameBox.add(roomName);
-	
-	
-			// It is important to note that each 'section' described here is its own JPanel of some kind that defines the layout
-	
-			// Alright! Lets stack up these things so they all fall into place!
-	
-			this.add(exitList, BorderLayout.LINE_START);
-			this.add(inOutTextBox,BorderLayout.PAGE_END);
-			this.add(roomImageDisplay, BorderLayout.CENTER);
-			this.add(itemList,  BorderLayout.LINE_END);
-			this.add(roomNameBox, BorderLayout.PAGE_START);
-	
-	
-	
-			s = new Scanner(System.in);
-	
-		}
+		 */
+
+		// There will be a section that reads out the current name of the room
+		roomNameBox = new JPanel(new GridLayout(1,0));
+		JTextField roomName = new JTextField("Room name");
+		roomName.setEditable(false);
+		roomNameBox.add(roomName);
+
+
+		// It is important to note that each 'section' described here is its own JPanel of some kind that defines the layout
+
+		// Alright! Lets stack up these things so they all fall into place!
+
+		this.add(exitList, BorderLayout.LINE_START);
+		this.add(inOutTextBox,BorderLayout.PAGE_END);
+		this.add(roomImageDisplay, BorderLayout.CENTER);
+		this.add(itemList,  BorderLayout.LINE_END);
+		this.add(roomNameBox, BorderLayout.PAGE_START);
+
+
+
+
+
+	}
 
 
 
@@ -186,28 +180,82 @@ import javax.swing.JTextField;
 		// method to recreate the UI to reflect the changes that the user just did. 
 
 
-		// sample UI, this is going to be extremely simple to start, so I can focus on getting the action listener working, then when
-		// that is done I can actually focus on adding the components that represent all the data in the room.
-		// ok lets start with the static component, Room name
 
-
-		//pseudo code time:
-
-		// alright, so here we go, we find the component inside of roomNameBox and cast it to a JTextField (it only should ever be a JTextField)
-		// then we just set its text to the text passed in gameStateData var.
+		// ------------------------------- Update Room Name ---------------------------------
 		JTextField roomName = (JTextField) roomNameBox.getComponent(0);
 		roomName.setText(gameStateData.getRoomName());
+		// ----------------------------------------------------------------------------------
 		
+			
+		
+		
+		// ------------------------------- Update Console Output ----------------------------
 		JTextArea outBox = (JTextArea) inOutTextBox.getComponent(0);
 		outBox.setText(gameStateData.getRoomDesc());
+		// ----------------------------------------------------------------------------------
 		
-		JTextField inBox = (JTextField) inOutTextBox.getComponent(1);
 		
-	
+		
 
+		// ------------------------------- Update Exit List ---------------------------------
+		ArrayList<String> exits = gameStateData.getExits();
+		// clear previous textfields
+		exitList.removeAll();
+		
+		// deal with formatting
+		int curIndex = 0;
+		GridBagConstraints c1 = new GridBagConstraints();
+		c1.gridy = curIndex;
+		
+		// create initial textfield for title
+		JTextField exitTitle = new JTextField("Exits:");
+		exitTitle.setEditable(false);
+		exitList.add(exitTitle,c1);
+		curIndex++;
+		
+		// create and add textfield for each available exit
+		for(String s: exits) {
+			c1.gridy = curIndex;
+			JTextField newExit = new JTextField(s);
+			newExit.setEditable(false);
+			exitList.add(newExit,c1);
+			curIndex++;
+		}
 
+		// ----------------------------------------------------------------------------------
 
+		
+		
+		
+		// ------------------------------- Update Inventory ---------------------------------
+		ArrayList<String> items = gameStateData.getInv();
+		itemList.removeAll();
+		
+		curIndex = 0;
+		GridBagConstraints c2 = new GridBagConstraints();
+		c2.gridy = curIndex;
+		
+		// create initial textfield for title
+		JTextField inventoryTitle = new JTextField("Inventory:");
+		inventoryTitle.setEditable(false);
+		itemList.add(inventoryTitle,c2);
+		curIndex++;
+		
+		// create and add textfield for each available exit
+		for(String s: items) {
+			c2.gridy = curIndex;
+			
+			JTextField newItem = new JTextField(s);
+			newItem.setEditable(false);
+			itemList.add(newItem,c2);
+			curIndex++;
+		}
+		
+		// ----------------------------------------------------------------------------------
 
+		
+		
+		this.validate();
 	}
 
 
@@ -223,7 +271,7 @@ import javax.swing.JTextField;
 	 */
 	public Command getTextInput(String in) {
 
-		
+
 		char[] chars = new char[in.length()];
 		for(int i = 0; i < in.length(); i++) {
 			chars[i] = in.charAt(i);
@@ -314,7 +362,7 @@ import javax.swing.JTextField;
 		{
 			return 3;
 		}
-		
+
 	}
 	public String interpretDirection(String dir)
 	{
