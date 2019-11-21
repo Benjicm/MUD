@@ -28,6 +28,7 @@ public class InputManager extends JPanel{
 	private JPanel itemList;
 	private JPanel roomNameBox;
 	private int charID;
+	
 	// this boolean toggles whether it should print out info based about the contents of the commands entered.
 	private final boolean printCommandInfo = false; 
 
@@ -221,7 +222,6 @@ public class InputManager extends JPanel{
 			exitList.add(newExit,c1);
 			curIndex++;
 		}
-
 		// ----------------------------------------------------------------------------------
 
 		
@@ -250,11 +250,9 @@ public class InputManager extends JPanel{
 			itemList.add(newItem,c2);
 			curIndex++;
 		}
-		
 		// ----------------------------------------------------------------------------------
 
-		
-		
+		// final method run to make sure all the components are updated and ready to be displayed. For some reason this just fixes stuff.
 		this.validate();
 	}
 
