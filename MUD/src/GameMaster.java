@@ -23,6 +23,12 @@ public class GameMaster {
 		clist = new CharList();
 		commandQueue = new ArrayBlockingQueue<Command>(100);
 	}
+	public GameMaster(RoomList r, ItemList i, CharList c) {
+		rlist = r;
+		ilist = i;
+		clist = c;
+		commandQueue = new ArrayBlockingQueue<Command>(100);
+	}
 
 	public void setup() {
 		// this reads in data from the text files provided in the SetupFiles folder
