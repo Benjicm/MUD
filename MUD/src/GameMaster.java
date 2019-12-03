@@ -289,16 +289,8 @@ public class GameMaster {
 	public void run() {
 		
 		InputManager in = new InputManager(commandQueue);
-		JFrame tWindow = new JFrame();
-		Container tPane = tWindow.getContentPane();
-		tPane.setPreferredSize(new Dimension(500, 300));
-		tPane.add(in);
-		
-		tWindow.pack();
-		tWindow.setLocation(200, 200);
-		tWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tWindow.setVisible(true);
-		in.updateUI(createInfo(1, 1));
+
+		in.updateUI(createInfo(1, 2));
 		while(running) {
 			
 		

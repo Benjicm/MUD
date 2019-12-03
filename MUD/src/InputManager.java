@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -40,14 +42,21 @@ public class InputManager extends JPanel implements CharController{
 
 
 
-		// Alright here we go, so lets break this down into pseudo-code
-		// First things first, the InputManager is itself a Jpanel, will be a second-from-the-top level container
-		// outside of inputManager, it is added to a JFrame window somewhere in the GameMaster's Run method.
+		
 
-		// Anyways, Inside of this class, we have one main layout manager, "BorderLayout". 
-		// This will contain chunked off sections that contain groups of UI pieces.
 		super(new BorderLayout());
 
+		JFrame tWindow = new JFrame();
+		Container tPane = tWindow.getContentPane();
+		tPane.setPreferredSize(new Dimension(500, 300));
+		tPane.add(this);
+		
+		tWindow.pack();
+		tWindow.setLocation(200, 200);
+		tWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tWindow.setVisible(true);
+		
+		
 		// Somewhat out of place intializaation of the BlockingQueue field
 		this.commandQueue = commandQueue;
 
