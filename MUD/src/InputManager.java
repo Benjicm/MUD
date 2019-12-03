@@ -14,13 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class InputManager extends JPanel{
+public class InputManager extends JPanel implements CharController{
 
 
 
 	private static String lineSeparator = System.lineSeparator();
 
-
+	private Command commandBuffer;
 	private BlockingQueue<Command> commandQueue;
 	private JPanel exitList;
 	private JPanel inOutTextBox;
@@ -145,7 +145,10 @@ public class InputManager extends JPanel{
 
 
 	}
-
+	public int getCharID()
+	{
+		return charID;
+	}
 
 
 
@@ -164,8 +167,14 @@ public class InputManager extends JPanel{
 	// guess I'm now doing this with action listeners. shouldn't be too hard.
 
 
-
-
+	/**
+	 * this literally just exists to call updateUI because spaghetti
+	 * @param gameStateData
+	 */
+	public void updateInfo(GameStateInfo gameStateData)
+	{
+		updateUI(gameStateData);
+	}
 	/**
 	 * Takes in a parameter containing all the necessary data to display the current state of the game to the user. Then updates the UI
 	 * to accurately reflect the state. 
@@ -324,6 +333,14 @@ public class InputManager extends JPanel{
 			System.out.println("Actual Command Count: " + commandCount);
 		}
 		Command out = createCommand(returnedIn);
+		return out;
+	}
+	//TODO hey this is probably going to cause errors
+	public Command sendCommand()
+	{
+		while(commandBuffer == null){}
+		Command out = commandBuffer;
+		commandBuffer = null;
 		return out;
 	}
 	public Command createCommand(String[] commandText)
