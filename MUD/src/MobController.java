@@ -7,6 +7,7 @@ public class MobController implements CharController{
 	private ArrayList<String> visibleItems;
 	private ArrayList<String> visibleExits;
 	private ArrayList<String> inventory;
+	private boolean readyForInput;
 	
 	public MobController(int charID)
 	{
@@ -15,6 +16,7 @@ public class MobController implements CharController{
 		visibleItems = new ArrayList<String>();
 		visibleExits = new ArrayList<String>();
 		inventory = new ArrayList<String>();
+		readyForInput = true;
 	}
 	
 	public Command moveMob(String dir)
@@ -35,7 +37,9 @@ public class MobController implements CharController{
 		// TODO Auto-generated method stub
 		return charID;
 	}
-
+	public boolean onCall() {
+		return readyForInput;
+	}
 	@Override
 	public Command sendCommand() {
 		// TODO Auto-generated method stub
@@ -48,6 +52,7 @@ public class MobController implements CharController{
 		}
 		int exit = (int)(Math.random()*visibleExits.size());
 		String direction = visibleExits.get(exit);
+		readyForInput = false;
 		return moveMob(direction);
 	}
 
@@ -58,5 +63,6 @@ public class MobController implements CharController{
 		visibleChars = gameStateData.getChars();
 		visibleItems = gameStateData.getItems();
 		visibleExits = gameStateData.getExits();
+		readyForInput = true;
 	}
 }

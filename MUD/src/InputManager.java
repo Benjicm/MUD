@@ -28,6 +28,7 @@ public class InputManager extends JPanel implements CharController{
 	private JPanel itemList;
 	private JPanel roomNameBox;
 	private int charID;
+	private boolean readyForInput;
 	
 	// this boolean toggles whether it should print out info based about the contents of the commands entered.
 	private final boolean printCommandInfo = false; 
@@ -143,13 +144,16 @@ public class InputManager extends JPanel implements CharController{
 
 
 
-
+		readyForInput = true;
 	}
 	public int getCharID()
 	{
 		return charID;
 	}
-
+	public boolean onCall()
+	{
+		return readyForInput;
+	}
 
 
 	// ok pseudo code / planing time
@@ -174,6 +178,7 @@ public class InputManager extends JPanel implements CharController{
 	public void updateInfo(GameStateInfo gameStateData)
 	{
 		updateUI(gameStateData);
+		readyForInput = true;
 	}
 	/**
 	 * Takes in a parameter containing all the necessary data to display the current state of the game to the user. Then updates the UI
@@ -341,6 +346,7 @@ public class InputManager extends JPanel implements CharController{
 		while(commandBuffer == null){}
 		Command out = commandBuffer;
 		commandBuffer = null;
+		readyForInput = false;
 		return out;
 	}
 	public Command createCommand(String[] commandText)
