@@ -46,16 +46,14 @@ public class SetupFileReader {
 				}
 				
 				// checks the first char to see if its actually a number
-				else if(ints.indexOf(line.charAt(0)) == -1) {
-
-				}
+				//else if(ints.indexOf(line.charAt(0)) == -1) {}
 				
 				// Room id code
-				int id = Integer.parseInt(line.substring(0, first));
+				String rName = line.substring(0, first);
 				
 				// Room description Code
 				String description = line.substring(first+1);
-				//rlist.addRoom(description);
+				rlist.addRoom(rName,description);
 				
 				
 			}

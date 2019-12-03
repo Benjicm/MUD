@@ -26,24 +26,27 @@ public class GameMaster {
 
 	public void setup() {
 		// this reads in data from the text files provided in the SetupFiles folder
-		//rlist = SetupFileReader.setupRooms("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Roomlist.txt");
-		//SetupFileReader.setupExits("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Exitlist.txt", rlist);
+		rlist = SetupFileReader.setupRooms("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Roomlist.txt");
+		SetupFileReader.setupExits("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Exitlist.txt", rlist);
 		//SetupFileReader.setupItems("MUD"+ SetupFileReader.fileSeparator + "SetupFiles" + SetupFileReader.fileSeparator + "Itemlist.txt", rlist);
+		
+		
+		
 		
 		// the setup() method still needs something to initialize the player
 		
 		// test stuff: 
 		clist.addChar("Testman");
-		rlist.addRoom("Room 1","You are in the first room.");
-		rlist.addRoom("Room 2","You are in the second room.");
+		//rlist.addRoom("Room 1","You are in the first room.");
+		//rlist.addRoom("Room 2","You are in the second room.");
 		ilist.addItem("potion", true);
 		
 		
-		rlist.addExitToRoom(1, 2, Exit.NORTH);
-		rlist.addExitToRoom(2, 1, Exit.SOUTH);
+		//rlist.addExitToRoom(1, 2, Exit.NORTH);
+		//rlist.addExitToRoom(2, 1, Exit.SOUTH);
 		// how to add items?
-		clist.moveChar(1, 1);
-		rlist.addChar(1, 1);
+		clist.moveChar(1, 2);
+		rlist.addChar(2, 1);
 		rlist.addItem(2, 1);
 		ilist.setItemContainer(1, false, 2);
 		
