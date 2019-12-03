@@ -294,9 +294,9 @@ public class GameMaster {
 	}
 	public void run() {
 		
-		InputManager in = new InputManager(commandQueue);
+		
 
-		in.updateUI(createInfo(1, 2));
+		//in.updateUI(createInfo(1, 2));
 		while(running) {
 			
 		
@@ -313,7 +313,7 @@ public class GameMaster {
 				GameStateInfo newGameState = interpretCommand(currentCommand);
 				
 				
-				in.updateUI(newGameState);
+				//in.updateUI(newGameState);
 				
 				
 				

@@ -35,7 +35,7 @@ public class InputManager extends JPanel implements CharController{
 	private final boolean printCommandInfo = false; 
 
 
-	public InputManager(BlockingQueue<Command> commandQueue) {
+	public InputManager(BlockingQueue<Command> commandQueue, int charID) {
 		super(new BorderLayout());
 
 		JFrame tWindow = new JFrame();
@@ -47,7 +47,7 @@ public class InputManager extends JPanel implements CharController{
 		tWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tWindow.setVisible(true);
 
-		this.charID = 1;
+		this.charID = charID;
 
 		// container for list of exits
 		exitList = new JPanel(new GridBagLayout());

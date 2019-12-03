@@ -206,7 +206,7 @@ public class SetupFileReader {
 	}
 	
 	//TODO finish making this method setup mobs and characters
-	public static void setupChars(String inputFilename, RoomList rlist) {
+	public static void setupChars(String inputFilename, RoomList rlist, CharList clist) {
 
 		FileReader fReader = null;
 		BufferedReader buffedReader = null;
