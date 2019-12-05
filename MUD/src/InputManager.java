@@ -111,7 +111,7 @@ public class InputManager extends JPanel implements CharController{
 	{
 		return charID;
 	}
-	public boolean onCall()
+	public boolean isReady()
 	{
 		return readyForInput;
 	}
@@ -269,7 +269,10 @@ public class InputManager extends JPanel implements CharController{
 		Command out = createCommand(returnedIn);
 		return out;
 	}
-	
+	public void setReady(boolean ready)
+	{
+		readyForInput = ready;
+	}
 	//TODO hey this is probably going to cause errors
 	public Command sendCommand()
 	{

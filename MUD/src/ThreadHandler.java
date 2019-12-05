@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.*;
 
 public class ThreadHandler {
 	GameMaster gm;
@@ -17,5 +18,14 @@ public class ThreadHandler {
 		InputManager in = new InputManager(commandQueue,1);
 		
 		
+	}
+	
+	public void run()
+	{
+		ExecutorService service = Executors.newCachedThreadPool();
+	}
+	private Callable<Command> getCommand(int controllerIndex)
+	{
+		return null;
 	}
 }

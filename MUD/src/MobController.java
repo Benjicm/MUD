@@ -37,8 +37,12 @@ public class MobController implements CharController{
 		// TODO Auto-generated method stub
 		return charID;
 	}
-	public boolean onCall() {
+	public boolean isReady() {
 		return readyForInput;
+	}
+	public void setReady(boolean ready)
+	{
+		readyForInput = ready;
 	}
 	@Override
 	public Command sendCommand() {
