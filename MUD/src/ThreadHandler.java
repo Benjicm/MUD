@@ -26,6 +26,16 @@ public class ThreadHandler {
 	}
 	private Callable<Command> getCommand(int controllerIndex)
 	{
-		return null;
+		return () -> {
+			CharController c = controllers.get(controllerIndex);
+			try {
+				Command out = c.sendCommand();
+				controllers.get(controllerIndex).setReady(false);
+				return out;
+			}
+			catch(NullPointerException e) {
+				return null;
+			}
+		};
 	}
 }

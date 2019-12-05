@@ -276,11 +276,17 @@ public class InputManager extends JPanel implements CharController{
 	//TODO hey this is probably going to cause errors
 	public Command sendCommand()
 	{
-		while(commandBuffer == null){}
-		Command out = commandBuffer;
-		commandBuffer = null;
-		readyForInput = false;
-		return out;
+		if(commandBuffer == null)
+		{
+			throw new NullPointerException();
+		}
+		else
+		{
+			Command out = commandBuffer;
+			commandBuffer = null;
+			readyForInput = false;
+			return out;
+		}
 	}
 	public Command createCommand(String[] commandText)
 	{
