@@ -70,9 +70,9 @@ public class InputManager extends JPanel implements CharController{
 		ActionListener inBoxListener  = (e) -> {
 			JTextField f = (JTextField)e.getSource();
 			try {
-				commandQueue.put(getTextInput(f.getText()));
+				commandBuffer = getTextInput(f.getText());
 				f.setText("");
-			} catch (InterruptedException e1) {
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 
